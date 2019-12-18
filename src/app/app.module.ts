@@ -13,7 +13,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { WidgetUtilService } from './providers/widget-util.service';
+import { HomePageModule } from './home/home.module';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { WidgetUtilService } from './providers/widget-util.service';
     AngularFireModule.initializeApp(environment.firebaseConfig, 'onTheGo'),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    HomePageModule
   ],
   providers: [
     StatusBar,
