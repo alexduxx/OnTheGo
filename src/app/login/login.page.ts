@@ -42,7 +42,6 @@ export class LoginPage implements OnInit {
     } catch (error) {
       console.log(error);
       this.widgetUtilService.presentToast(error.message);
-      
     }
   }
 

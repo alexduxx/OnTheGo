@@ -14,47 +14,68 @@ import { WidgetUtilService } from '../providers/widget-util.service';
 })
 export class SignupPage implements OnInit {
 
-  signupForm: FormGroup;
-  email: FormControl;
-  password: FormControl;
-
-  formError: any = {
-    email: '',
-    password: ''
-  };
-
-  validationMessage: any = SIGNUP;
-  showSignupSpinner = false;
-
+  userType = '';
+  currentStep = 0;
+  val = 0.25;
+  showSignupSpinner: boolean;
+  
+  formData: any;
+  
   constructor(
     private firebaseAuthService: FirebaseAuthService,
-    private helperService: HelperService,
-    private router: Router,
-    private widgetUtilService: WidgetUtilService
-    ) { }
+    private widgetUtilService: WidgetUtilService,
+    private router: Router
+  ) {
 
-  ngOnInit() {
-    this.createFormControl();
-    this.createForm();
   }
 
-  resetForm() {
-    this.signupForm.reset();
-    this.formError = {
-      email: '',
-      password: ''
-    };
+ ngOnInit() {}
+
+  formChange(event) {
+    console.log(event);
+    this.formData = event;
+  }
+
+  userTypeChange(event) {
+    this.userType = event;
+  }
+
+  isBusiness() {
+    return this.userType === 'shop';
+  }
+
+  stepToRegister(event) {
+
+  }
+
+
+  toggleNext() {
+    if (this.userType === 'user') {
+      this.currentStep += 1;
+      this.val += 0.25;
+    }
+    this.currentStep += 1;
+    this.val += 0.25;
+  }
+
+  togglePrevious() {
+    if (this.userType === 'user') {
+      this.currentStep -= 1;
+      this.val -= 0.25;
+    }
+    this.currentStep -= 1;
+    this.val -= 0.25;
   }
 
   async signup() {
     try {
-     this.showSignupSpinner = true;
-     const result = await this.firebaseAuthService.registerWithEmailPassword(this.email.value, this.password.value);
-     console.log( 'result', result);
-     this.showSignupSpinner = false;
-     this.widgetUtilService.presentToast('Successfully signed up. Verification email sent!');
-     this.resetForm();
-     this.router.navigate(['/home']);
+      this.showSignupSpinner = true;
+      const result = await this.firebaseAuthService.registerWithEmailPassword(this.formData.email, this.formData.password);
+      console.log('result', result);
+      this.showSignupSpinner = false;
+      this.widgetUtilService.presentToast('Successfully signed up. Verification email sent!');
+      this.resetForm();
+      this.router.navigate(['/home']);
     } catch (error) {
       console.log('Error', error);
       this.showSignupSpinner = false;
@@ -62,31 +83,9 @@ export class SignupPage implements OnInit {
     }
   }
 
-  goToLoginPage() {
-    this.router.navigate(['/login']);
-  }
 
-  createFormControl() {
-    this.email = new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]);
-    this.password = new FormControl('', [
-      Validators.required,
-      Validators.minLength(6)
-    ]);
-  }
-
-  createForm() {
-    this.signupForm = new FormGroup({
-      email: this.email,
-      password: this.password
-  });
-    this.signupForm.valueChanges.subscribe(data => this.onFormValueChanged(data));
-  }
-
-  onFormValueChanged(data) {
-    this.formError = this.helperService.prepareValidationMessage(this.signupForm, this.validationMessage, this.formError);
+  resetForm() {
+    throw new Error("Method not implemented.");
   }
 
 }

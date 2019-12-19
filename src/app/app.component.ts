@@ -27,6 +27,7 @@ export class AppComponent {
   ];
 
   isLoggedIn = false;
+  
 
   constructor(
     private platform: Platform,
@@ -38,6 +39,8 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+
+  loadingState = this.widgetUtilService.loading;
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -57,7 +60,10 @@ export class AppComponent {
         this.isLoggedIn = false;
       }
       this.handleNavigation();
-      this.widgetUtilService.dismissLoader();
+
+      if (this.loadingState !== null) {
+        this.widgetUtilService.dismissLoader();
+      }
     }, (error) => {
       this.widgetUtilService.dismissLoader();
       this.widgetUtilService.presentToast(error.message);

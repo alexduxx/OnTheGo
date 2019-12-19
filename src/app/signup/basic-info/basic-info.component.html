@@ -1,0 +1,25 @@
+<form [formGroup]="signupForm" autocomplete="off">
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="text" formControlName="email"></ion-input>
+  </ion-item>
+  <div class="error-message">
+    {{formError.email}}
+  </div>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
+  </ion-item>
+  <div class="error-message">
+    {{formError.password}}
+  </div>
+  <!-- <ion-button color="secondary" expand="block" class="ion-margin-top" [disabled]="signupForm.invalid"
+    (click)="signup()">Signup
+    <ion-spinner name="dots" *ngIf="showSignupSpinner"></ion-spinner>
+  </ion-button> -->
+  <ion-button color="light" expand="block" class="ion-margin-top" (click)="goToLoginPage()">Go to Login
+  </ion-button>
+  <ion-button color="secondary" expand="block" class="ion-margin-top" (click)="onNext()">
+    Next
+  </ion-button>
+</form>
