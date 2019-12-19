@@ -19,12 +19,12 @@ const routes: Routes = [
                 path: 'profile',
                 loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
             },
+            {
+                path: '',
+                redirectTo: 'shop-list',
+                pathMatch: 'full'
+            }
         ]
-    },
-    {
-        path: '',
-        redirectTo: 'home/shop-list',
-        pathMatch: 'full'
     }
 ];
 

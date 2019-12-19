@@ -1,37 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      Home
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
-    <ion-button (click)="logout()">
-      Logout
-    </ion-button>
-
-    <router-outlet></router-outlet>
-
     <ion-tabs>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="shop-list">
-          <ion-icon name="calendar"></ion-icon>
-          <ion-label>Schedule</ion-label>
-          <ion-badge>6</ion-badge>
+          <ion-icon name="restaurant"></ion-icon>
+          <ion-label>Shops</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="orders">
-          <ion-icon name="contacts"></ion-icon>
-          <ion-label>Speakers</ion-label>
+          <ion-icon name="clipboard"></ion-icon>
+          <ion-label>Orders</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="profile">
-          <ion-icon name="information-circle"></ion-icon>
-          <ion-label>About</ion-label>
+          <ion-icon name="contact"></ion-icon>
+          <ion-label>Profile</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>

@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
       this.showLoginSpinner = false;
       this.widgetUtilService.presentToast('Login Success!');
       this.resetForm();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/shop-list']);
     } catch (error) {
       console.log('Error', error);
       this.showLoginSpinner = false;
